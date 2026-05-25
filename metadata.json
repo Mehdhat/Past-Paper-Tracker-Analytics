@@ -1,5 +1,6 @@
 {
   "name": "Past Paper Tracker & Analytics",
   "description": "Extract questions from past paper images/PDFs, track topic frequency across years, and analyze trends.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

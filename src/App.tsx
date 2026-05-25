@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, ChangeEvent } from "react";
 import { 
   FileUp, 
   Search, 
@@ -6,7 +6,6 @@ import {
   List, 
   Trash2, 
   Loader2, 
-  ChevronRight, 
   Calendar, 
   Sun, 
   Hash, 
@@ -28,11 +27,11 @@ import {
   Cell 
 } from "recharts";
 import { motion, AnimatePresence } from "motion/react";
-import { extractQuestionsFromImage, ExtractedQuestion } from "./lib/gemini";
+import { extractQuestionsFromImage } from "./lib/gemini";
 import { Question, TopicFrequency } from "./types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType, BorderStyle } from "docx";
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType } from "docx";
 import { saveAs } from "file-saver";
 
 function cn(...inputs: ClassValue[]) {
@@ -63,7 +62,7 @@ export default function App() {
     localStorage.setItem("past_paper_questions", JSON.stringify(questions));
   }, [questions]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
@@ -559,7 +558,7 @@ export default function App() {
                   </button>
                 </div>
 
-                <div className="p-6 overflow-y-auto space-y-6 custom-scrollbar">
+                <div className="p-6 overflow-y-auto space-y-6 custom-scrollbar bg-slate-50/50">
                   {/* Current Question */}
                   <div className="p-4 rounded-2xl bg-blue-50 border border-blue-100">
                     <div className="flex items-center gap-2 mb-2">
@@ -580,7 +579,7 @@ export default function App() {
                     ) : (
                       <div className="space-y-4">
                         {relatedQuestions.map(rq => (
-                          <div key={rq.id} className="p-4 rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all group">
+                          <div key={rq.id} className="p-4 bg-white rounded-2xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-all group">
                             <div className="flex items-center justify-between mb-2">
                               <div className="flex items-center gap-3">
                                 <span className="text-xs font-bold text-slate-800">{rq.year} {rq.season}</span>
